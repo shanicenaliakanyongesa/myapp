@@ -1,38 +1,300 @@
-.App {
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #3498db;
+  --accent-color: #e74c3c;
+  --success-color: #27ae60;
+}
+
+.hero-section {
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
+  color: white;
+  padding: 100px 0;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Section Title */
+
+.section-title {
+  margin-bottom: 50px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Sidebar editing */
+
+body {
+  background: #f5f6fa;
 }
 
-.App-header {
-  background-color: #282c34;
+.admin-dashboard {
   min-height: 100vh;
+  background: #f8f9fa;
+}
+
+/* Sidebar Styles */
+/* This CSS styles a hidden sidebar that stays fixed on the left side of the screen, takes up the full height, has a gradient background, white text, a shadow, and smooth slide-in/out animation. It starts off hidden (translateX(-100%)) and can slide into view when toggled. */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 280px;
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  color: white;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1050;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.sidebar-menu {
+  padding: 1rem;
+  flex: 1;
+}
+
+.menu-item {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border: none;
+  background: transparent;
+  color: white;
+  text-align: left;
+  border-radius: 8px;
+  transition: all 0.3s ease;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+}
+
+.menu-item.active {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.menu-icon {
+  font-size: 1.2rem;
+  width: 20px;
+  text-align: center;
+}
+
+.logout-section {
+  padding: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logout-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 0.5rem;
+}
+
+.logout-btn:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+}
+
+/* Main Content */
+.main-content {
+  transition: margin-left 0.3s ease;
+  min-height: 100vh;
+}
+
+.topbar {
+  background: #dde5ecff 0%;
+  color: black;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: between;
+  align-items: center;
+}
+
+.topbar-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.hamburger-btn {
+  background: rgba(61, 54, 54, 0.2);
+  border: none;
   color: white;
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.App-link {
-  color: #61dafb;
+.hamburger-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.content-area {
+  padding: 1.5rem;
+}
+
+/* Overlay for mobile sidebar */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.sidebar-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Desktop Styles */
+@media (min-width: 992px) {
+  .sidebar {
+    transform: translateX(0) !important;
+    position: fixed;
+    width: 260px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .main-content {
+    margin-left: 260px;
   }
+
+  .hamburger-btn {
+    display: none;
+  }
+
+  .sidebar-overlay {
+    display: none;
+  }
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) and (max-width: 991px) {
+  .sidebar {
+    width: 260px;
+  }
+
+  .topbar {
+    padding: 1rem;
+  }
+
+  .content-area {
+    padding: 1rem;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 767px) {
+  .sidebar {
+    width: 280px;
+  }
+
+  .topbar {
+    padding: 0.75rem 1rem;
+  }
+
+  .topbar-title {
+    font-size: 1.1rem;
+  }
+
+  .content-area {
+    padding: 1rem;
+  }
+
+  .profile-img {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 576px) {
+  .sidebar {
+    width: 100vw;
+  }
+
+  .topbar {
+    padding: 0.75rem;
+  }
+
+  .topbar-title {
+    font-size: 1rem;
+  }
+
+  .content-area {
+    padding: 0.75rem;
+  }
+}
+
+
+/* Assignment */
+.Admin-dashboard {
+  display: flex;
+}
+
+.sidebar {
+  width: 250px;
+  flex-shrink: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 1rem;
+  background: #f8f9fa;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+.assignment-submissions {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
