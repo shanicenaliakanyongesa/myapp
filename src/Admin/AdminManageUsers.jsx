@@ -305,7 +305,7 @@ const AdminUsers = ({ token }) => {
                 <button
                   type="button"
                   className="btn-close"
-                  onClick={() => setEditUser(null)}
+                  
                 ></button>
               </div>
 
@@ -317,10 +317,7 @@ const AdminUsers = ({ token }) => {
                   <input
                     type="text"
                     className="form-control rounded-pill shadow-sm"
-                    value={editForm.name}
-                    onChange={(e) =>
-                      setForm({ ...editForm, name: e.target.value })
-                    }
+                   
                   />
                 </div>
 
@@ -330,10 +327,7 @@ const AdminUsers = ({ token }) => {
                   <input
                     type="email"
                     className="form-control rounded-pill shadow-sm"
-                    value={editForm.email}
-                    onChange={(e) =>
-                      setForm({ ...editForm, email: e.target.value })
-                    }
+                    
                   />
                 </div>
 
@@ -342,10 +336,7 @@ const AdminUsers = ({ token }) => {
                   <label className="form-label fw-medium">Role</label>
                   <select
                     className="form-select rounded-pill shadow-sm"
-                    value={editForm.role}
-                    onChange={(e) =>
-                      setForm({ ...editForm, role: e.target.value })
-                    }
+                    
                   >
                     <option value="admin">Admin</option>
                     <option value="teacher">Teacher</option>
@@ -358,13 +349,13 @@ const AdminUsers = ({ token }) => {
               <div className="modal-footer border-0 d-flex justify-content-end gap-2 px-4 pb-3">
                 <button
                   className="btn btn-outline-danger rounded-pill px-4"
-                  onClick={() => setEditUser(null)}
+                 
                 >
                   Cancel
                 </button>
                 <button
                   className="btn btn-primary rounded-pill px-4"
-                  onClick={handleUpdateUser}
+                 
                 >
                   Save Changes
                 </button>
@@ -391,7 +382,6 @@ const AdminUsers = ({ token }) => {
                 <h5 className="modal-title fw-semibold">Confirm Delete</h5>
                 <button
                   className="btn-close btn-close-white"
-                  onClick={() => setDeleteUser(null)}
                 ></button>
               </div>
 
@@ -410,13 +400,13 @@ const AdminUsers = ({ token }) => {
               <div className="modal-footer justify-content-center border-0 pb-4">
                 <button
                   className="btn btn-danger px-4 py-2 rounded-pill fw-semibold"
-                  onClick={handleDeleteUser}
+                  
                 >
                   Yes, Delete
                 </button>
                 <button
                   className="btn btn-light border px-4 py-2 rounded-pill fw-semibold"
-                  onClick={() => setDeleteUser(null)}
+                
                 >
                   Cancel
                 </button>
