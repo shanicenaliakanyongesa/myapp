@@ -40,7 +40,8 @@ This component allows the admin to:
 
 ## Step 1 — Create the Course Form
 
-```const [newCourse, setNewCourse] = useState({
+``` javascript 
+const [newCourse, setNewCourse] = useState({
   name: "",
   description: "",
   teacher: "",
@@ -60,7 +61,8 @@ This component allows the admin to:
 
 Now we build the actual form that users will see. Here's where the magic happens:
 
-```<form onSubmit={CreateCourse}>
+``` javascript
+<form onSubmit={CreateCourse}>
   <div className="mb-3">
     <label className="form-label fw-semibold">Course Name</label>
     <input
@@ -107,7 +109,8 @@ Now we build the actual form that users will see. Here's where the magic happens
 
 ##  The CreateCourse Function:
 
-```async function CreateCourse(e) {
+``` javascript
+async function CreateCourse(e) {
   e.preventDefault();
   try {
     await axios.post(
@@ -139,7 +142,8 @@ Now we build the actual form that users will see. Here's where the magic happens
 
 We need teachers to assign to courses, right? Let's get them!
 
-```const [users, setUsers] = useState([]);
+``` javascript
+const [users, setUsers] = useState([]);
 
 // Fetch all users from the backend
 async function fetchUsers() {
@@ -157,7 +161,8 @@ const teachers = users.filter((user) => user.role === "teacher");
 ```
 
 **Now let's map those teachers in the dropdown within our form:**
-```<div className="mb-4">
+``` javascript
+<div className="mb-4">
   <label className="form-label fw-semibold">Assign Teacher</label>
   <select
     className="form-select"
@@ -182,7 +187,7 @@ const teachers = users.filter((user) => user.role === "teacher");
 
 ## Step 4 — Fetch and Display Courses
 
-```
+``` javascript
 // Hooks for courses
 const [courses, setCourses] = useState([]);
 const [loading, setLoading] = useState(false);
@@ -214,7 +219,7 @@ useEffect(() => {
 
 ## Displaying courses:
 
-```
+``` javascript
 <div className="row g-4">
   {courses.map((course) => (
     <div key={course._id} className="col-md-4">
@@ -250,7 +255,7 @@ useEffect(() => {
 
 When you click "Edit", we need to show a modal (that pop-up window). Let's set that up:
 
-```
+``` javascript
 // Store the course being edited
 const [editCourse, setEditCourse] = useState(null);
 
@@ -275,7 +280,7 @@ function clickEdit(course) {
 ```
 
 ## The Edit Modal:
-```
+``` javascript
 {editCourse && (
   <div className="modal fade show d-block" tabIndex="-1" style={{ background: "rgba(0,0,0,0.5)" }}>
     <div className="modal-dialog modal-dialog-centered">
@@ -337,7 +342,7 @@ function clickEdit(course) {
 
 ## Step 6: Update Function - Save the Changes
 
-```
+``` javascript
 async function handleUpdateCourse() {
   try {
     await axios.put(
@@ -362,7 +367,7 @@ async function handleUpdateCourse() {
 
 Last but not least, let's handle deletion:
 
-```
+``` javascript
 // Hook to track which course to delete
 const [deletecourse, setDeleteCourse] = useState(null);
 
@@ -386,7 +391,8 @@ async function handleDelete() {
 }
 ```
 ## Delete Confirmation Modal:
-``` {deletecourse &&(
+```  javascript
+{deletecourse &&(
   <div className="modal fade show d-block " tabIndex="-1">
     <div className="modal dialog modal-dialog-centered">
       <div className="modal-content">
@@ -416,7 +422,7 @@ Now let's tackle the AdminClassroom component. Same energy, different features! 
 ## Step 1: Hooks for Classroom Form & Binding
 Just like courses, we need hooks for classroom data:
 
-```
+``` javascript
 const [classroom, setClassroom] = useState({
   name: "",
   course: "",
@@ -425,7 +431,7 @@ const [classroom, setClassroom] = useState({
 ```
 
 ## The Form:
-```
+``` javascript
 <form onSubmit={createClassroom}>
   <div className="mb-3">
     <label className="form-label fw-semibold">Classname</label>
@@ -452,7 +458,7 @@ const [classroom, setClassroom] = useState({
 
 ## Step 2: Fetch Courses & Map to Course Input
 
-```
+``` javascript
 // Hook for courses
 const [courses, setCourses] = useState([]);
 
@@ -468,7 +474,7 @@ async function fetchCourses() {
 
 ## Map courses in the dropdown:
 
-```
+``` javascript
 <div className="mb-3">
   <label className="form-label fw-semibold">Course Selection</label>
   <select
@@ -490,7 +496,7 @@ async function fetchCourses() {
 
 ## Step 3: Fetch Users, Filter Teachers & Map to Teacher Input
 
-```
+``` javascript
 // Hook for users
 const [users, setUsers] = useState([]);
 
@@ -509,7 +515,7 @@ const teachers = users.filter((u) => u.role === "teacher");
 
 ## Teacher Dropdown:
 
-```
+``` javascript
 <div className="mb-3">
   <label className="form-label fw-semibold">Assign Teacher</label>
   <select
@@ -530,7 +536,7 @@ const teachers = users.filter((u) => u.role === "teacher");
 ```
 
 ## Step 4: Create Classroom Function
-```
+``` javascript
 async function createClassroom(e) {
   e.preventDefault();
   try {
@@ -548,7 +554,7 @@ async function createClassroom(e) {
 }
 ```
 ## Step 5: Fetch & Display Classrooms with Details
-```
+``` javascript
 // Hook for classrooms
 const [classrooms, setClassrooms] = useState([]);
 
@@ -571,7 +577,7 @@ useEffect(() => {
 
 ## Display Classrooms:
 
-```
+``` javascript
 <div className="row g-4">
   {classrooms.map((cls) => (
     <div className="col-md-4 mt-3" key={cls._id}>
@@ -620,7 +626,7 @@ useEffect(() => {
 ## Step 6: Add Student to Class Modal
 This is where it gets interesting! Let's add students to classrooms:
 
-```
+``` javascript
 // Hook for selected classroom
 const [addclassroom, setAddclassroom] = useState(null);
 
@@ -653,7 +659,7 @@ async function AddStudentToClass(e) {
 
 ## Add Student Modal:
 
-```
+``` javascript
 {addclassroom && (
   <div className="modal show fade d-block" tabIndex="-1">
     <div className="modal-dialog">
@@ -695,7 +701,7 @@ async function AddStudentToClass(e) {
 ## Step 7: View Students in Class
 
 Let's see who's in each classroom:
-```
+``` javascript
 // Hook to store which classroom we're viewing
 const [viewClass, setViewClass] = useState(null);
 
@@ -724,7 +730,7 @@ async function RemoveStudentFromClassroom(classId, studentId) {
 
 ## View Modal:
 
-```
+``` javascript
 {viewClass && (
   <div className="modal show fade d-block" tabIndex="-1" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
     <div className="modal-dialog modal-lg modal-dialog-centered">
@@ -780,7 +786,8 @@ async function RemoveStudentFromClassroom(classId, studentId) {
 
 Similar to editing courses, but for classrooms:
 
-``` // Hooks for editing
+```  javascript
+// Hooks for editing
 const [editClassroom, setEditClassroom] = useState(null);
 const [editForm, setEditForm] = useState({
   name: "",
@@ -807,7 +814,7 @@ async function handleUpdateClassroom(e) {
 
 ## Edit Modal:
 
-```
+``` javascript
 {editClassroom && (
   <div className="modal fade show d-flex align-items-center justify-content-center" tabIndex="-1" style={{ display: "flex", background: "rgba(0,0,0,0.4)", backdropFilter: "blur(4px)", zIndex: 1050 }}>
     <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: "500px", width: "90%", transition: "transform 0.3s ease, opacity 0.3s ease", transform: "translateY(0)" }}>
@@ -889,7 +896,7 @@ async function handleUpdateClassroom(e) {
 
 ## Step 9: Delete Classroom
 Last step - removing classrooms:
-```
+``` javascript
 // Hook for delete
 const [deleteClassroom, setDeleteClassroom] = useState(null);
 
@@ -909,7 +916,7 @@ async function handleDeleteClassroom() {
 }
 ```
 ## Delete Modal
-```
+``` javascript
 {deleteClassroom && (
         <div
           className="modal fade show d-block"
@@ -950,7 +957,7 @@ async function handleDeleteClassroom() {
 ```
 
 ## Complete Courses Code
-```
+``` javascript
 // Importing necessary packages and components
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -1326,7 +1333,7 @@ export default AdminCourse;
 
 ## Complete Classroom Code
 
-```
+``` javascript
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
